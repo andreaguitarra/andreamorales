@@ -892,6 +892,30 @@
     footer { flex-direction: column; gap: 1rem; padding: 2rem; }
     .artist-name { font-size: 1.8rem; }
   }
+
+  /* ─── LANGUAGE SWITCH ─── */
+  .lang-switch {
+    background: transparent;
+    border: 1px solid rgba(192,57,43,0.5);
+    color: var(--muted);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    padding: 0.4rem 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-shrink: 0;
+  }
+  .lang-switch:hover { border-color: var(--red-bright); color: white; }
+  .lang-divider { color: var(--red-bright); }
+  .lang-es, .lang-en { transition: all 0.3s; }
+  body.lang-en .lang-es { color: var(--muted); }
+  body.lang-en .lang-en { color: white; font-weight: 700; }
+  body:not(.lang-en) .lang-es { color: white; font-weight: 700; }
+  body:not(.lang-en) .lang-en { color: var(--muted); }
 </style>
 </head>
 <body>
@@ -902,26 +926,31 @@
 <nav>
   <a href="#" class="nav-logo">AM</a>
   <ul class="nav-links">
-    <li><a href="#sobre-mi">Sobre mí</a></li>
-    <li><a href="#experiencia">Trayectoria</a></li>
-    <li><a href="#proyectos">Proyectos</a></li>
-    <li><a href="#oferta">Show</a></li>
-    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="#sobre-mi" data-es="Sobre mí" data-en="About">Sobre mí</a></li>
+    <li><a href="#experiencia" data-es="Trayectoria" data-en="Career">Trayectoria</a></li>
+    <li><a href="#proyectos" data-es="Proyectos" data-en="Projects">Proyectos</a></li>
+    <li><a href="#oferta" data-es="Show" data-en="Show">Show</a></li>
+    <li><a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a></li>
   </ul>
+  <button class="lang-switch" id="langBtn" onclick="toggleLang()">
+    <span class="lang-es">ES</span>
+    <span class="lang-divider">|</span>
+    <span class="lang-en">EN</span>
+  </button>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-line"></div>
   <div class="hero-left">
-    <div class="hero-tag">Guitarrista · Cantautora · Venezuela</div>
+    <div class="hero-tag"><span data-i18n="t0">Guitarrista · Cantautora · Venezuela</span></div>
     <h1 class="hero-name">
       Andrea<span>Morales</span>
     </h1>
     <p class="hero-subtitle">Soul · R&B · Blues · Pop Alternativo</p>
     <div class="hero-cta">
-      <a href="#contacto" class="btn-primary">Contratar show</a>
-      <a href="#sobre-mi" class="btn-outline">Conocer más</a>
+      <a href="#contacto" class="btn-primary"><span data-i18n="t1">Contratar show</span></a>
+      <a href="#sobre-mi" class="btn-outline"><span data-i18n="t2">Conocer más</span></a>
     </div>
   </div>
   <div class="hero-right">
@@ -932,10 +961,10 @@
 
 <!-- STATS STRIP -->
 <div class="stats-strip">
-  <div class="stat"><span class="stat-num">15</span><span class="stat-label">Años tocando</span></div>
-  <div class="stat"><span class="stat-num">6+</span><span class="stat-label">Años profesionales</span></div>
-  <div class="stat"><span class="stat-num">4</span><span class="stat-label">Giras nacionales</span></div>
-  <div class="stat"><span class="stat-num">50+</span><span class="stat-label">Artistas min. show</span></div>
+  <div class="stat"><span class="stat-num">15</span><span class="stat-label"><span data-i18n="t3">Años tocando</span></span></div>
+  <div class="stat"><span class="stat-num">6+</span><span class="stat-label"><span data-i18n="t4">Años profesionales</span></span></div>
+  <div class="stat"><span class="stat-num">4</span><span class="stat-label"><span data-i18n="t5">Giras nacionales</span></span></div>
+  <div class="stat"><span class="stat-num">50+</span><span class="stat-label"><span data-i18n="t6">Artistas min. show</span></span></div>
 </div>
 
 
@@ -955,13 +984,13 @@
 <!-- ABOUT -->
 <section class="about" id="sobre-mi">
   <div class="reveal">
-    <div class="about-label">// Quién soy</div>
+    <div class="about-label"><span data-i18n="t7">// Quién soy</span></div>
     <h2 class="about-title">Guitarra.<br>Voz.<br><em>Presencia.</em></h2>
     <p class="about-text">
-      Guitarrista con más de 6 años de trayectoria profesional y 15 años de experiencia en el instrumento. Ha colaborado con artistas nacionales e internacionales, consolidando una presencia sólida en escenarios, giras y proyectos musicales a lo largo de Venezuela.
+      <span data-i18n="t8">Guitarrista con más de 6 años de trayectoria profesional y 15 años de experiencia en el instrumento. Ha colaborado con artistas nacionales e internacionales, consolidando una presencia sólida en escenarios, giras y proyectos musicales a lo largo de Venezuela.</span>
     </p>
     <p class="about-text">
-      Actualmente desarrolla su carrera como cantautora y solista, con canciones propias que llevan su sello personal: fuerza, emoción y la guitarra eléctrica al centro del escenario.
+      <span data-i18n="t9">Actualmente desarrolla su carrera como cantautora y solista, con canciones propias que llevan su sello personal: fuerza, emoción y la guitarra eléctrica al centro del escenario.</span>
     </p>
     <div class="genre-tags">
       <span class="tag">Soul</span>
@@ -975,7 +1004,7 @@
     <div class="big-number">15</div>
     <div style="border:1px solid rgba(139,0,0,0.2); padding:3rem; position:relative;">
       <div style="font-family:'Playfair Display',serif; font-style:italic; font-size:1.4rem; line-height:1.7; color:#e8e0d8;">
-        "Mi propuesta está centrada en demostrar la fuerza y presencia femenina en la guitarra eléctrica — solos en vivo, performance vocal y una puesta en escena moderna."
+        <span data-i18n="t10">"Mi propuesta está centrada en demostrar la fuerza y presencia femenina en la guitarra eléctrica — solos en vivo, performance vocal y una puesta en escena moderna."</span>
       </div>
       <div style="margin-top:1.5rem; font-size:0.65rem; letter-spacing:0.3em; color:var(--red-bright);">— ANDREA MORALES</div>
     </div>
@@ -990,8 +1019,8 @@
   <img src="foto-solo.jpeg" alt="Andrea — solo en escenario" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%;filter:brightness(0.75);">
   <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(6,6,6,0.6) 0%, transparent 30%, transparent 60%, rgba(6,6,6,0.9) 100%);"></div>
   <div style="position:absolute;top:50%;left:6rem;transform:translateY(-50%);">
-    <div style="font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;color:#C0392B;margin-bottom:0.8rem;font-family:'Montserrat',sans-serif;">En escenario</div>
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,5rem);color:white;line-height:0.95;">Cada nota.<br>Cada noche.</div>
+    <div style="font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;color:#C0392B;margin-bottom:0.8rem;font-family:'Montserrat',sans-serif;"><span data-i18n="t11">En escenario</span></div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,5rem);color:white;line-height:0.95;"><span data-i18n="t12">Cada nota.<br>Cada noche.</span></div>
   </div>
 </div>
 
@@ -999,44 +1028,44 @@
 <section class="experience" id="experiencia">
   <div class="section-header reveal">
     <span class="section-num">02</span>
-    <h2 class="section-title">Giras &<br>Colaboraciones</h2>
+    <h2 class="section-title"><span data-i18n="t13">Giras &<br>Colaboraciones</span></h2>
   </div>
   <div class="timeline reveal">
     <div class="timeline-item">
       <div class="timeline-year">2022</div>
       <div class="timeline-artist">Gustavo Elis</div>
-      <div class="timeline-desc">Gira nacional — Maracaibo, Punto Fijo, San Cristóbal, Valencia, Barquisimeto, Maracay y Caracas</div>
+      <div class="timeline-desc"><span data-i18n="t14">Gira nacional — Maracaibo, Punto Fijo, San Cristóbal, Valencia, Barquisimeto, Maracay y Caracas</span></div>
     </div>
     <div class="timeline-item"></div>
     <div class="timeline-item"></div>
     <div class="timeline-item">
       <div class="timeline-year">2023</div>
       <div class="timeline-artist">Lasso</div>
-      <div class="timeline-desc">Artista invitada abriendo conciertos en Valencia, Maracay y Caracas</div>
+      <div class="timeline-desc"><span data-i18n="t15">Artista invitada abriendo conciertos en Valencia, Maracay y Caracas</span></div>
     </div>
     <div class="timeline-item">
       <div class="timeline-year">2023</div>
       <div class="timeline-artist">Musas del Vallenato</div>
-      <div class="timeline-desc">Gira por Maracaibo y Caracas, incluyendo presentaciones en medios</div>
+      <div class="timeline-desc"><span data-i18n="t16">Gira por Maracaibo y Caracas, incluyendo presentaciones en medios</span></div>
     </div>
     <div class="timeline-item"></div>
     <div class="timeline-item"></div>
     <div class="timeline-item">
       <div class="timeline-year">2024</div>
       <div class="timeline-artist">Gio Fernández</div>
-      <div class="timeline-desc">Gira — Mérida, Portuguesa y Guárico</div>
+      <div class="timeline-desc"><span data-i18n="t17">Gira — Mérida, Portuguesa y Guárico</span></div>
     </div>
     <div class="timeline-item">
       <div class="timeline-year">2024</div>
       <div class="timeline-artist">Jesse y Joy / Beéle & J Quiles</div>
-      <div class="timeline-desc">Opening como artista invitada — Meganova (nov–dic 2024)</div>
+      <div class="timeline-desc"><span data-i18n="t18">Opening como artista invitada — Meganova (nov–dic 2024)</span></div>
     </div>
     <div class="timeline-item"></div>
     <div class="timeline-item"></div>
     <div class="timeline-item">
       <div class="timeline-year">2025</div>
       <div class="timeline-artist">Bonny Cepeda · Liz</div>
-      <div class="timeline-desc">Carnavales 2025 · Guitarrista principal (feb 2025 – actualidad)</div>
+      <div class="timeline-desc"><span data-i18n="t19">Carnavales 2025 · Guitarrista principal (feb 2025 – actualidad)</span></div>
     </div>
   </div>
 </section>
@@ -1046,20 +1075,20 @@
   <div class="reveal">
     <div class="section-header">
       <span class="section-num">03</span>
-      <h2 class="section-title">Proyectos<br>Propios</h2>
+      <h2 class="section-title"><span data-i18n="t20">Proyectos<br>Propios</span></h2>
     </div>
   </div>
   <div style="display:flex; flex-direction:column; gap:1.5rem;">
     <div class="project-card reveal">
-      <div class="project-card-tag">2023 – Actualidad</div>
+      <div class="project-card-tag"><span data-i18n="t21">2023 – Actualidad</span></div>
       <div class="project-card-title">MEGANOVA</div>
-      <div class="project-card-text">Proyecto musical femenino que combina corrientes del rock con música original y shows temáticos. Ha participado en la apertura de Jesse y Joy, Gatorade Caracas Rock, Oktoberfest 2024 y el Teatro Teresa Carreño.</div>
+      <div class="project-card-text"><span data-i18n="t22">Proyecto musical femenino que combina corrientes del rock con música original y shows temáticos. Ha participado en la apertura de Jesse y Joy, Gatorade Caracas Rock, Oktoberfest 2024 y el Teatro Teresa Carreño.</span></div>
       <div class="project-card-year">23</div>
     </div>
     <div class="project-card reveal">
-      <div class="project-card-tag">Actualidad — Proyecto Solista</div>
+      <div class="project-card-tag"><span data-i18n="t23">Actualidad — Proyecto Solista</span></div>
       <div class="project-card-title">ANDREA MORALES</div>
-      <div class="project-card-text">Cantautora con canciones propias. Soul, R&B, blues y pop alternativo. Guitarra eléctrica al protagonismo, solos en vivo y un performance vocal que resalta la fuerza femenina en la música.</div>
+      <div class="project-card-text"><span data-i18n="t24">Cantautora con canciones propias. Soul, R&B, blues y pop alternativo. Guitarra eléctrica al protagonismo, solos en vivo y un performance vocal que resalta la fuerza femenina en la música.</span></div>
       <div class="project-card-year">AM</div>
     </div>
   </div>
@@ -1073,9 +1102,9 @@
     <div style="position:absolute;inset:0;background:linear-gradient(to right,transparent 60%,rgba(6,6,6,1));"></div>
   </div>
   <div style="background:var(--dark);display:flex;flex-direction:column;justify-content:center;padding:4rem 5rem;">
-    <div style="font-size:0.6rem;letter-spacing:0.4em;text-transform:uppercase;color:#C0392B;margin-bottom:1rem;font-family:'Montserrat',sans-serif;">Propuesta vocal</div>
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4vw,4rem);color:white;line-height:0.95;margin-bottom:1.5rem;">Guitarra<br>y Voz.<br><span style="color:#C0392B;">En vivo.</span></div>
-    <p style="font-family:'Montserrat',sans-serif;font-size:0.8rem;line-height:1.8;color:#d0c8c0;">Un show en formato solista donde la guitarra eléctrica y la voz se complementan en una sola artista. Sin banda. Sin playback. Solo presencia, técnica y emoción.</p>
+    <div style="font-size:0.6rem;letter-spacing:0.4em;text-transform:uppercase;color:#C0392B;margin-bottom:1rem;font-family:'Montserrat',sans-serif;"><span data-i18n="t25">Propuesta vocal</span></div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4vw,4rem);color:white;line-height:0.95;margin-bottom:1.5rem;"><span data-i18n="t26">Guitarra<br>y Voz.<br><span style="color:#C0392B;">En vivo.</span></span></div>
+    <p style="font-family:'Montserrat',sans-serif;font-size:0.8rem;line-height:1.8;color:#d0c8c0;"><span data-i18n="t27">Un show en formato solista donde la guitarra eléctrica y la voz se complementan en una sola artista. Sin banda. Sin playback. Solo presencia, técnica y emoción.</span></p>
   </div>
 </div>
 
@@ -1085,38 +1114,38 @@
 <section class="offer" id="oferta">
   <div class="section-header reveal">
     <span class="section-num">04</span>
-    <h2 class="section-title">Propuesta<br>Escénica</h2>
+    <h2 class="section-title"><span data-i18n="t28">Propuesta<br>Escénica</span></h2>
   </div>
   <div class="offer-grid">
     <div class="offer-item reveal">
       <div class="offer-icon">🎸</div>
-      <div class="offer-title">Show Solista</div>
-      <div class="offer-text">Guitarra, voz y soporte instrumental. Un formato completo que no necesita banda — presencia total en escena.</div>
+      <div class="offer-title"><span data-i18n="t29">Show Solista</span></div>
+      <div class="offer-text"><span data-i18n="t30">Guitarra, voz y soporte instrumental. Un formato completo que no necesita banda — presencia total en escena.</span></div>
     </div>
     <div class="offer-item reveal">
       <div class="offer-icon">⚡</div>
-      <div class="offer-title">Solos en Vivo</div>
-      <div class="offer-text">Solos de guitarra ejecutados en vivo, acompañados de una puesta en escena moderna. Virtuosismo sin concesiones.</div>
+      <div class="offer-title"><span data-i18n="t31">Solos en Vivo</span></div>
+      <div class="offer-text"><span data-i18n="t32">Solos de guitarra ejecutados en vivo, acompañados de una puesta en escena moderna. Virtuosismo sin concesiones.</span></div>
     </div>
     <div class="offer-item reveal">
       <div class="offer-icon">🎤</div>
-      <div class="offer-title">Performance Vocal</div>
-      <div class="offer-text">Una voz que complementa y eleva. Nostalgia, frescura y conexión real con el público desde el primer acorde.</div>
+      <div class="offer-title"><span data-i18n="t33">Performance Vocal</span></div>
+      <div class="offer-text"><span data-i18n="t34">Una voz que complementa y eleva. Nostalgia, frescura y conexión real con el público desde el primer acorde.</span></div>
     </div>
     <div class="offer-item reveal">
       <div class="offer-icon">👥</div>
-      <div class="offer-title">Mayor Afluencia</div>
-      <div class="offer-text">Un show que atrae público y lo mantiene más tiempo en el local. Música en vivo que eleva la experiencia del cliente.</div>
+      <div class="offer-title"><span data-i18n="t35">Mayor Afluencia</span></div>
+      <div class="offer-text"><span data-i18n="t36">Un show que atrae público y lo mantiene más tiempo en el local. Música en vivo que eleva la experiencia del cliente.</span></div>
     </div>
     <div class="offer-item reveal">
       <div class="offer-icon">📱</div>
-      <div class="offer-title">Visibilidad Digital</div>
-      <div class="offer-text">Contenido promocional que impulsa el alcance en redes del local. Una comunidad activa que suma clientes nuevos.</div>
+      <div class="offer-title"><span data-i18n="t37">Visibilidad Digital</span></div>
+      <div class="offer-text"><span data-i18n="t38">Contenido promocional que impulsa el alcance en redes del local. Una comunidad activa que suma clientes nuevos.</span></div>
     </div>
     <div class="offer-item reveal">
       <div class="offer-icon">♀</div>
-      <div class="offer-title">Propuesta Única</div>
-      <div class="offer-text">Un concepto femenino, fresco y diferenciado. La fuerza de la mujer en la guitarra eléctrica como protagonista.</div>
+      <div class="offer-title"><span data-i18n="t39">Propuesta Única</span></div>
+      <div class="offer-text"><span data-i18n="t40">Un concepto femenino, fresco y diferenciado. La fuerza de la mujer en la guitarra eléctrica como protagonista.</span></div>
     </div>
   </div>
 </section>
@@ -1128,7 +1157,7 @@
     <h2 class="section-title">Repertorio</h2>
   </div>
   <div class="reveal" style="font-size:0.78rem; color:var(--muted); margin-top:-2rem; margin-bottom:1rem; max-width:500px;">
-    Clásicos icónicos y éxitos actuales que conectan con públicos de todas las edades — de los 80s a hoy.
+    <span data-i18n="t41">Clásicos icónicos y éxitos actuales que conectan con públicos de todas las edades — de los 80s a hoy.</span>
   </div>
   <div class="artist-list">
     <div class="artist-name">Michael Jackson</div>
@@ -1137,21 +1166,21 @@
     <div class="artist-name">Billie Eilish</div>
     <div class="artist-name">John Mayer</div>
     <div class="artist-name">Olivia Dean</div>
-    <div class="artist-name">& más</div>
+    <div class="artist-name"><span data-i18n="t42">& más</span></div>
   </div>
 </section>
 
 <!-- PRICE -->
 <div class="price-section reveal">
   <div class="price-left">
-    <h2>Show en vivo.<br>Una noche que se recuerda.</h2>
-    <p>Disponible para locales, eventos privados y festivales en toda Venezuela.</p>
-    <a href="#contacto" class="btn-outline" style="display:inline-block; margin-top:2rem; border-color:rgba(255,255,255,0.4); color:white;">Consultar disponibilidad</a>
+    <h2><span data-i18n="t43">Show en vivo.<br>Una noche que se recuerda.</span></h2>
+    <p><span data-i18n="t44">Disponible para locales, eventos privados y festivales en toda Venezuela.</span></p>
+    <a href="#contacto" class="btn-outline" style="display:inline-block; margin-top:2rem; border-color:rgba(255,255,255,0.4); color:white;"><span data-i18n="t45">Consultar disponibilidad</span></a>
   </div>
   <div class="price-badge">
-    <span class="currency">DESDE</span>
+    <span class="currency"><span data-i18n="t46">DESDE</span></span>
     <span class="amount">120<span style="font-size:1.5rem">$</span></span>
-    <span class="duration">50–60 minutos</span>
+    <span class="duration"><span data-i18n="t47">50–60 minutos</span></span>
   </div>
 </div>
 
@@ -1159,11 +1188,11 @@
 <section class="contact" id="contacto">
   <div class="reveal">
     <h2 class="contact-title">
-      <span>Hagamos algo</span>
-      Increíble<br>Juntos.
+      <span><span data-i18n="t48">Hagamos algo</span></span>
+      <span data-i18n="t49">Increíble<br>Juntos.</span>
     </h2>
     <p class="contact-text">
-      ¿Quieres llevar música en vivo de alto nivel a tu espacio? Escríbeme y hablamos de la propuesta ideal para tu evento o local.
+      <span data-i18n="t50">¿Quieres llevar música en vivo de alto nivel a tu espacio? Escríbeme y hablamos de la propuesta ideal para tu evento o local.</span>
     </p>
     <div class="social-row">
       <a href="#" class="social-pill">Instagram</a>
@@ -1184,7 +1213,7 @@
       <span class="contact-item-value">+58 424 185 3313</span>
     </div>
     <div class="contact-item">
-      <span class="contact-item-label">Redes Sociales</span>
+      <span class="contact-item-label"><span data-i18n="t51">Redes Sociales</span></span>
       <span class="contact-item-value">@andreamoralesguitar</span>
     </div>
   </div>
@@ -1196,14 +1225,14 @@
   <img src="foto-final.jpeg" alt="Andrea Morales ante el público" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 65%;">
   <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(6,6,6,0.7) 0%, transparent 35%, transparent 65%, rgba(6,6,6,1) 100%);"></div>
   <div style="position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);text-align:center;">
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,4rem);color:white;letter-spacing:0.15em;line-height:1;">Donde hay una guitarra,<br><span style="color:#C0392B;">hay una historia.</span></div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,4rem);color:white;letter-spacing:0.15em;line-height:1;"><span data-i18n="t52">Donde hay una guitarra,<br><span style="color:#C0392B;">hay una historia.</span></span></div>
   </div>
 </div>
 
 <!-- FOOTER -->
 <footer>
   <div class="logo-text">ANDREA MORALES</div>
-  <div class="copy">Guitarrista / Cantautora · Venezuela · 2025</div>
+  <div class="copy"><span data-i18n="t53">Guitarrista / Cantautora · Venezuela · 2025</span></div>
 </footer>
 
 <script>
@@ -1232,5 +1261,142 @@
   });
 </script>
 
+
+<script>
+  let currentLang = 'es';
+
+  const translations = {
+  es: {
+    "t0": `Guitarrista · Cantautora · Venezuela`,
+    "t1": `Contratar show`,
+    "t2": `Conocer más`,
+    "t3": `Años tocando`,
+    "t4": `Años profesionales`,
+    "t5": `Giras nacionales`,
+    "t6": `Artistas min. show`,
+    "t7": `// Quién soy`,
+    "t8": `Guitarrista con más de 6 años de trayectoria profesional y 15 años de experiencia en el instrumento. Ha colaborado con artistas nacionales e internacionales, consolidando una presencia sólida en escenarios, giras y proyectos musicales a lo largo de Venezuela.`,
+    "t9": `Actualmente desarrolla su carrera como cantautora y solista, con canciones propias que llevan su sello personal: fuerza, emoción y la guitarra eléctrica al centro del escenario.`,
+    "t10": `"Mi propuesta está centrada en demostrar la fuerza y presencia femenina en la guitarra eléctrica — solos en vivo, performance vocal y una puesta en escena moderna."`,
+    "t11": `En escenario`,
+    "t12": `Cada nota.<br>Cada noche.`,
+    "t13": `Giras &<br>Colaboraciones`,
+    "t14": `Gira nacional — Maracaibo, Punto Fijo, San Cristóbal, Valencia, Barquisimeto, Maracay y Caracas`,
+    "t15": `Artista invitada abriendo conciertos en Valencia, Maracay y Caracas`,
+    "t16": `Gira por Maracaibo y Caracas, incluyendo presentaciones en medios`,
+    "t17": `Gira — Mérida, Portuguesa y Guárico`,
+    "t18": `Opening como artista invitada — Meganova (nov–dic 2024)`,
+    "t19": `Carnavales 2025 · Guitarrista principal (feb 2025 – actualidad)`,
+    "t20": `Proyectos<br>Propios`,
+    "t21": `2023 – Actualidad`,
+    "t22": `Proyecto musical femenino que combina corrientes del rock con música original y shows temáticos. Ha participado en la apertura de Jesse y Joy, Gatorade Caracas Rock, Oktoberfest 2024 y el Teatro Teresa Carreño.`,
+    "t23": `Actualidad — Proyecto Solista`,
+    "t24": `Cantautora con canciones propias. Soul, R&B, blues y pop alternativo. Guitarra eléctrica al protagonismo, solos en vivo y un performance vocal que resalta la fuerza femenina en la música.`,
+    "t25": `Propuesta vocal`,
+    "t26": `Guitarra<br>y Voz.<br><span style="color:#C0392B;">En vivo.</span>`,
+    "t27": `Un show en formato solista donde la guitarra eléctrica y la voz se complementan en una sola artista. Sin banda. Sin playback. Solo presencia, técnica y emoción.`,
+    "t28": `Propuesta<br>Escénica`,
+    "t29": `Show Solista`,
+    "t30": `Guitarra, voz y soporte instrumental. Un formato completo que no necesita banda — presencia total en escena.`,
+    "t31": `Solos en Vivo`,
+    "t32": `Solos de guitarra ejecutados en vivo, acompañados de una puesta en escena moderna. Virtuosismo sin concesiones.`,
+    "t33": `Performance Vocal`,
+    "t34": `Una voz que complementa y eleva. Nostalgia, frescura y conexión real con el público desde el primer acorde.`,
+    "t35": `Mayor Afluencia`,
+    "t36": `Un show que atrae público y lo mantiene más tiempo en el local. Música en vivo que eleva la experiencia del cliente.`,
+    "t37": `Visibilidad Digital`,
+    "t38": `Contenido promocional que impulsa el alcance en redes del local. Una comunidad activa que suma clientes nuevos.`,
+    "t39": `Propuesta Única`,
+    "t40": `Un concepto femenino, fresco y diferenciado. La fuerza de la mujer en la guitarra eléctrica como protagonista.`,
+    "t41": `Clásicos icónicos y éxitos actuales que conectan con públicos de todas las edades — de los 80s a hoy.`,
+    "t42": `& más`,
+    "t43": `Show en vivo.<br>Una noche que se recuerda.`,
+    "t44": `Disponible para locales, eventos privados y festivales en toda Venezuela.`,
+    "t45": `Consultar disponibilidad`,
+    "t46": `DESDE`,
+    "t47": `50–60 minutos`,
+    "t48": `Hagamos algo`,
+    "t49": `Increíble<br>Juntos.`,
+    "t50": `¿Quieres llevar música en vivo de alto nivel a tu espacio? Escríbeme y hablamos de la propuesta ideal para tu evento o local.`,
+    "t51": `Redes Sociales`,
+    "t52": `Donde hay una guitarra,<br><span style="color:#C0392B;">hay una historia.</span>`,
+    "t53": `Guitarrista / Cantautora · Venezuela · 2025`,
+  },
+  en: {
+    "t0": `Guitarist · Singer-Songwriter · Venezuela`,
+    "t1": `Book a show`,
+    "t2": `Learn more`,
+    "t3": `Years playing`,
+    "t4": `Professional years`,
+    "t5": `National tours`,
+    "t6": `Artists min. show`,
+    "t7": `// Who I am`,
+    "t8": `Guitarist with over 6 years of professional experience and 15 years playing the instrument. She has collaborated with national and international artists, building a strong presence on stages, tours, and music projects across Venezuela.`,
+    "t9": `Currently developing her career as a singer-songwriter and solo artist, with original songs that carry her personal stamp: strength, emotion, and the electric guitar at the center of the stage.`,
+    "t10": `"My proposal is centered on showcasing the strength and feminine presence in electric guitar — live solos, vocal performance, and a modern stage show."`,
+    "t11": `On stage`,
+    "t12": `Every note.<br>Every night.`,
+    "t13": `Tours &<br>Collaborations`,
+    "t14": `National tour — Maracaibo, Punto Fijo, San Cristóbal, Valencia, Barquisimeto, Maracay and Caracas`,
+    "t15": `Guest artist opening concerts in Valencia, Maracay and Caracas`,
+    "t16": `Tour through Maracaibo and Caracas, including media appearances`,
+    "t17": `Tour — Mérida, Portuguesa and Guárico`,
+    "t18": `Opening act as guest artist — Meganova (Nov–Dec 2024)`,
+    "t19": `Carnival 2025 · Lead guitarist (Feb 2025 – present)`,
+    "t20": `Personal<br>Projects`,
+    "t21": `2023 – Present`,
+    "t22": `Female musical project combining rock currents with original music and themed shows. Has performed at the opening of Jesse y Joy, Gatorade Caracas Rock, Oktoberfest 2024, and Teatro Teresa Carreño.`,
+    "t23": `Present — Solo Project`,
+    "t24": `Singer-songwriter with original songs. Soul, R&B, blues and alternative pop. Electric guitar in the spotlight, live solos and a vocal performance that highlights feminine strength in music.`,
+    "t25": `Vocal proposal`,
+    "t26": `Guitar<br>and Voice.<br><span style="color:#C0392B;">Live.</span>`,
+    "t27": `A solo format show where electric guitar and voice complement each other in a single artist. No band. No playback. Just presence, technique and emotion.`,
+    "t28": `Stage<br>Proposal`,
+    "t29": `Solo Show`,
+    "t30": `Guitar, voice and instrumental support. A complete format that needs no band — total presence on stage.`,
+    "t31": `Live Solos`,
+    "t32": `Guitar solos performed live, accompanied by a modern stage production. Uncompromising virtuosity.`,
+    "t33": `Vocal Performance`,
+    "t34": `A voice that complements and elevates. Nostalgia, freshness and real connection with the audience from the first chord.`,
+    "t35": `Increased Traffic`,
+    "t36": `A show that attracts audiences and keeps them longer at your venue. Live music that elevates the customer experience.`,
+    "t37": `Digital Visibility`,
+    "t38": `Promotional content that boosts the venue's social media reach. An active community that brings in new customers.`,
+    "t39": `Unique Concept`,
+    "t40": `A feminine, fresh and differentiated concept. The strength of women in electric guitar as the protagonist.`,
+    "t41": `Iconic classics and current hits that connect with audiences of all ages — from the 80s to today.`,
+    "t42": `& more`,
+    "t43": `Live show.<br>A night to remember.`,
+    "t44": `Available for venues, private events and festivals across Venezuela.`,
+    "t45": `Check availability`,
+    "t46": `FROM`,
+    "t47": `50–60 minutes`,
+    "t48": `Let's create`,
+    "t49": `Something<br>Incredible.`,
+    "t50": `Want to bring high-level live music to your space? Write to me and we'll talk about the ideal proposal for your event or venue.`,
+    "t51": `Social Media`,
+    "t52": `Where there's a guitar,<br><span style="color:#C0392B;">there's a story.</span>`,
+    "t53": `Guitarist / Singer-Songwriter · Venezuela · 2025`,
+  }
+};
+
+
+  function toggleLang() {
+    currentLang = currentLang === 'es' ? 'en' : 'es';
+    document.body.classList.toggle('lang-en', currentLang === 'en');
+    
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations[currentLang][key]) {
+        el.innerHTML = translations[currentLang][key];
+      }
+    });
+
+    // Update nav links
+    document.querySelectorAll('.nav-links a[data-es]').forEach(el => {
+      el.textContent = el.getAttribute('data-' + currentLang);
+    });
+  }
+</script>
 </body>
 </html>
