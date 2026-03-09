@@ -77,6 +77,57 @@
 
   .nav-links a:hover { color: var(--red-bright); }
 
+
+  /* ─── HAMBURGER MENU ─── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0.3rem;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text);
+    transition: all 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(6,6,6,0.97);
+    z-index: 99;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    letter-spacing: 0.2em;
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .mobile-menu a:hover { color: var(--red-bright); }
+
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    nav { padding: 1.2rem 1.5rem; }
+    .lang-switch { font-size: 0.6rem; padding: 0.35rem 0.7rem; }
+  }
+
   /* ─── HERO ─── */
   .hero {
     min-height: 100vh;
@@ -932,12 +983,26 @@
     <li><a href="#oferta" data-es="Show" data-en="Show">Show</a></li>
     <li><a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a></li>
   </ul>
-  <button class="lang-switch" id="langBtn" onclick="toggleLang()">
-    <span class="lang-es">ES</span>
-    <span class="lang-divider">|</span>
-    <span class="lang-en">EN</span>
-  </button>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <button class="lang-switch" id="langBtn" onclick="toggleLang()">
+      <span class="lang-es">ES</span>
+      <span class="lang-divider">|</span>
+      <span class="lang-en">EN</span>
+    </button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#sobre-mi" onclick="toggleMenu()" data-es="Sobre mí" data-en="About">Sobre mí</a>
+  <a href="#experiencia" onclick="toggleMenu()" data-es="Trayectoria" data-en="Career">Trayectoria</a>
+  <a href="#proyectos" onclick="toggleMenu()" data-es="Proyectos" data-en="Projects">Proyectos</a>
+  <a href="#oferta" onclick="toggleMenu()" data-es="Show" data-en="Show">Show</a>
+  <a href="#contacto" onclick="toggleMenu()" data-es="Contacto" data-en="Contact">Contacto</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
@@ -1243,6 +1308,14 @@
     dot.style.top = e.clientY + 'px';
   });
 
+  // Hamburger menu
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const btn = document.getElementById('hamburger');
+    menu.classList.toggle('open');
+    btn.classList.toggle('open');
+  }
+
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
@@ -1393,7 +1466,7 @@
     });
 
     // Update nav links
-    document.querySelectorAll('.nav-links a[data-es]').forEach(el => {
+    document.querySelectorAll('.nav-links a[data-es], .mobile-menu a[data-es]').forEach(el => {
       el.textContent = el.getAttribute('data-' + currentLang);
     });
   }
