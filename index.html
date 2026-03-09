@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Andrea Morales — Guitarrista / Cantautora</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:ital,wght@0,300;0,400;0,600;1,300&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #8B0000;
+    --red-bright: #C0392B;
+    --red-glow: #ff2020;
+    --black: #060606;
+    --dark: #0e0e0e;
+    --mid: #1a1a1a;
+    --text: #ffffff;
+    --muted: #d0c8c0;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.35;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.4rem 4rem;
+    background: linear-gradient(to bottom, rgba(6,6,6,0.95), transparent);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.3em;
+    color: var(--red-bright);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--red-bright); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10rem 4rem 6rem 6rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-tag {
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--red-bright);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: var(--red-bright);
+  }
+
+  .hero-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 10vw, 9rem);
+    line-height: 0.88;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+    animation: fadeUp 1s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-name span {
+    display: block;
+    color: var(--text);
+    -webkit-text-stroke: 0px;
+  }
+
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--muted);
+    margin: 1.5rem 0 3rem;
+    animation: fadeUp 1s 0.2s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1.2rem;
+    animation: fadeUp 1s 0.4s ease forwards;
+    opacity: 0;
+  }
+
+  .btn-primary {
+    background: var(--red);
+    color: var(--text);
+    padding: 1rem 2.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+
+  .btn-primary:hover {
+    background: var(--red-bright);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(192, 57, 43, 0.5);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    padding: 1rem 2.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--muted);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--red-bright);
+    color: var(--red-bright);
+  }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+  }
+
+  .hero-right img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, var(--black) 0%, transparent 40%),
+                linear-gradient(to top, var(--black) 0%, transparent 30%);
+    z-index: 1;
+  }
+
+  .hero-bg-text {
+    position: absolute;
+    bottom: -2rem;
+    right: -1rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18vw;
+    color: rgba(139,0,0,0.06);
+    line-height: 1;
+    pointer-events: none;
+    z-index: 0;
+    user-select: none;
+  }
+
+  .hero-img-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1a0a0a 0%, #2d0d0d 40%, #1a0808 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Guitar SVG decoration */
+  .guitar-icon {
+    position: absolute;
+    right: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    opacity: 0.15;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Red vertical line accent */
+  .hero-line {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, transparent, var(--red-bright), transparent);
+    z-index: 3;
+  }
+
+  /* ─── STATS STRIP ─── */
+  .stats-strip {
+    background: var(--red);
+    padding: 1.2rem 6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .stats-strip::before {
+    content: '— ANDREA MORALES — GUITARRISTA — CANTAUTORA — VENEZUELA — ';
+    position: absolute;
+    white-space: nowrap;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.3em;
+    color: rgba(255,255,255,0.12);
+    animation: ticker 20s linear infinite;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    z-index: 1;
+  }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    color: white;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* ─── ABOUT ─── */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    min-height: 80vh;
+    padding: 8rem 6rem;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--red-bright);
+    margin-bottom: 1rem;
+  }
+
+  .about-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    line-height: 0.95;
+    margin-bottom: 2rem;
+  }
+
+  .about-title em {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--red-bright);
+  }
+
+  .about-text {
+    font-size: 0.85rem;
+    line-height: 1.9;
+    color: #e0d8d0;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-right {
+    position: relative;
+  }
+
+  .genre-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 2rem;
+  }
+
+  .tag {
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--red);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red-bright);
+    transition: all 0.3s;
+  }
+
+  .tag:hover {
+    background: var(--red);
+    color: white;
+  }
+
+  .big-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 12rem;
+    color: rgba(139,0,0,0.07);
+    line-height: 1;
+    position: absolute;
+    top: -2rem;
+    right: -2rem;
+    pointer-events: none;
+  }
+
+  /* ─── EXPERIENCE TIMELINE ─── */
+  .experience {
+    padding: 6rem 6rem;
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .experience::before {
+    content: 'TRAYECTORIA';
+    position: absolute;
+    right: -2rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 8rem;
+    color: rgba(139,0,0,0.04);
+    pointer-events: none;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .section-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5rem;
+    color: var(--red);
+    opacity: 0.4;
+    line-height: 1;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    line-height: 1;
+  }
+
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    position: relative;
+    max-width: 900px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--red), transparent);
+  }
+
+  .timeline-item {
+    padding: 2rem 3rem 2rem 0;
+    border-bottom: 1px solid rgba(139,0,0,0.15);
+    position: relative;
+  }
+
+  .timeline-item:nth-child(even) {
+    padding: 2rem 0 2rem 3rem;
+    text-align: left;
+  }
+
+  .timeline-item::after {
+    content: '';
+    position: absolute;
+    right: -5px;
+    top: 2.5rem;
+    width: 9px;
+    height: 9px;
+    background: var(--red-bright);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--red-glow);
+  }
+
+  .timeline-item:nth-child(even)::after {
+    left: -5px;
+    right: auto;
+  }
+
+  .timeline-year {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: var(--red-bright);
+    line-height: 1;
+  }
+
+  .timeline-artist {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0.3rem 0 0.2rem;
+    letter-spacing: 0.05em;
+  }
+
+  .timeline-desc {
+    font-size: 0.72rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ─── PROJECTS SECTION ─── */
+  .projects {
+    padding: 8rem 6rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .project-card {
+    background: var(--mid);
+    padding: 3rem;
+    position: relative;
+    border-left: 3px solid var(--red);
+    transition: all 0.4s;
+    overflow: hidden;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(139,0,0,0.05), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .project-card:hover::before { opacity: 1; }
+  .project-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(139,0,0,0.2); }
+
+  .project-card-tag {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red-bright);
+    margin-bottom: 1rem;
+  }
+
+  .project-card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .project-card-text {
+    font-size: 0.78rem;
+    line-height: 1.8;
+    color: #d8d0c8;
+  }
+
+  .project-card-year {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 2rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: rgba(139,0,0,0.12);
+    line-height: 1;
+  }
+
+  /* ─── WHAT I OFFER ─── */
+  .offer {
+    padding: 8rem 6rem;
+    background: var(--dark);
+  }
+
+  .offer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 4rem;
+  }
+
+  .offer-item {
+    background: var(--mid);
+    padding: 3rem 2.5rem;
+    transition: all 0.4s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .offer-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--red);
+    transform: scaleX(0);
+    transition: transform 0.4s;
+  }
+
+  .offer-item:hover::after { transform: scaleX(1); }
+  .offer-item:hover { background: #1e1515; }
+
+  .offer-icon {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .offer-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    margin-bottom: 0.8rem;
+    color: var(--text);
+  }
+
+  .offer-text {
+    font-size: 0.75rem;
+    line-height: 1.8;
+    color: var(--muted);
+  }
+
+  /* ─── REPERTOIRE ─── */
+  .repertoire {
+    padding: 8rem 6rem;
+    position: relative;
+  }
+
+  .artist-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-top: 4rem;
+  }
+
+  .artist-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    padding: 0.8rem 2rem;
+    border: 1px solid rgba(139,0,0,0.15);
+    color: rgba(232, 224, 216, 0.3);
+    transition: all 0.3s;
+    cursor: default;
+  }
+
+  .artist-name:hover {
+    color: var(--text);
+    background: rgba(139,0,0,0.1);
+    border-color: var(--red);
+  }
+
+  /* ─── CONTACT ─── */
+  .contact {
+    padding: 8rem 6rem;
+    background: var(--black);
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact::before {
+    content: 'CONTACTO';
+    position: absolute;
+    bottom: -3rem;
+    left: -2rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15rem;
+    color: rgba(139,0,0,0.03);
+    pointer-events: none;
+    line-height: 1;
+  }
+
+  .contact-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 6vw, 6rem);
+    line-height: 0.9;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-title span {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 0.45em;
+    color: var(--red-bright);
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-text {
+    font-size: 0.82rem;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .contact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(139,0,0,0.2);
+    transition: all 0.3s;
+  }
+
+  .contact-item:hover {
+    border-color: var(--red-bright);
+    background: rgba(139,0,0,0.05);
+  }
+
+  .contact-item-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red-bright);
+  }
+
+  .contact-item-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    color: var(--text);
+  }
+
+  .social-row {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .social-pill {
+    padding: 0.5rem 1.2rem;
+    border: 1px solid rgba(139,0,0,0.3);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+
+  .social-pill:hover {
+    background: var(--red);
+    color: white;
+    border-color: var(--red);
+  }
+
+  /* ─── PRICE BADGE ─── */
+  .price-section {
+    padding: 6rem 6rem;
+    background: var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+  }
+
+  .price-left h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1;
+    color: white;
+  }
+
+  .price-left p {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.7);
+    margin-top: 0.5rem;
+  }
+
+  .price-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    height: 180px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .price-badge .amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+    color: white;
+    line-height: 1;
+  }
+
+  .price-badge .currency {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.2em;
+  }
+
+  .price-badge .duration {
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.1em;
+    margin-top: 0.3rem;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 2.5rem 6rem;
+    border-top: 1px solid rgba(139,0,0,0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer .logo-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.3em;
+    color: var(--red-bright);
+  }
+
+  footer .copy {
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--red), transparent);
+    margin: 0 6rem;
+    opacity: 0.4;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(-50%) rotate(-15deg); }
+    50% { transform: translateY(-53%) rotate(-15deg); }
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(100%); }
+    to { transform: translateX(-100%); }
+  }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RED CURSOR DOT ─── */
+  .cursor-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--red-bright);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s;
+    box-shadow: 0 0 10px var(--red-glow);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 2rem; }
+    .hero { grid-template-columns: 1fr; position: relative; }
+    .hero-left { 
+      padding: 8rem 2rem 4rem; 
+      position: relative; 
+      z-index: 2;
+      background: linear-gradient(to bottom, rgba(6,6,6,0.6) 0%, rgba(6,6,6,0.4) 60%, rgba(6,6,6,0.85) 100%);
+    }
+    .hero-right { 
+      display: block;
+      position: absolute !important;
+      inset: 0;
+      z-index: 1;
+    }
+    .hero-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .hero-bg-text { display: none; }
+    .about, .contact, .projects { grid-template-columns: 1fr; padding: 5rem 2rem; gap: 3rem; }
+    .timeline { grid-template-columns: 1fr; }
+    .timeline::before { display: none; }
+    .timeline-item, .timeline-item:nth-child(even) { padding: 1.5rem 0 1.5rem 2rem; text-align: left; border-left: 1px solid var(--red); border-bottom: none; }
+    .timeline-item::after, .timeline-item:nth-child(even)::after { left: -5px; right: auto; }
+    .offer-grid { grid-template-columns: 1fr; }
+    .stats-strip { padding: 1.2rem 2rem; }
+    .experience, .offer, .repertoire { padding: 5rem 2rem; }
+    .price-section { flex-direction: column; padding: 4rem 2rem; text-align: center; }
+    footer { flex-direction: column; gap: 1rem; padding: 2rem; }
+    .artist-name { font-size: 1.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">AM</a>
+  <ul class="nav-links">
+    <li><a href="#sobre-mi">Sobre mí</a></li>
+    <li><a href="#experiencia">Trayectoria</a></li>
+    <li><a href="#proyectos">Proyectos</a></li>
+    <li><a href="#oferta">Show</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-line"></div>
+  <div class="hero-left">
+    <div class="hero-tag">Guitarrista · Cantautora · Venezuela</div>
+    <h1 class="hero-name">
+      Andrea<span>Morales</span>
+    </h1>
+    <p class="hero-subtitle">Soul · R&B · Blues · Pop Alternativo</p>
+    <div class="hero-cta">
+      <a href="#contacto" class="btn-primary">Contratar show</a>
+      <a href="#sobre-mi" class="btn-outline">Conocer más</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="hero.jpeg" alt="Andrea Morales">
+    <div class="hero-bg-text">AM</div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stat"><span class="stat-num">15</span><span class="stat-label">Años tocando</span></div>
+  <div class="stat"><span class="stat-num">6+</span><span class="stat-label">Años profesionales</span></div>
+  <div class="stat"><span class="stat-num">4</span><span class="stat-label">Giras nacionales</span></div>
+  <div class="stat"><span class="stat-num">50+</span><span class="stat-label">Artistas min. show</span></div>
+</div>
+
+
+<!-- PHOTO STRIP -->
+<div style="display:grid; grid-template-columns:1fr 1fr; height:60vh; overflow:hidden;">
+  <div style="overflow:hidden; position:relative;">
+    <img src="foto-escenario.jpeg" alt="Andrea en escenario" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;filter:brightness(0.85);transition:transform 0.6s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(6,6,6,0.3),transparent);"></div>
+  </div>
+  <div style="overflow:hidden; position:relative;">
+    <img src="foto-lluvia.jpeg" alt="Andrea en concierto bajo la lluvia" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:brightness(0.8);transition:transform 0.6s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+    <div style="position:absolute;inset:0;background:linear-gradient(to left,rgba(6,6,6,0.3),transparent);"></div>
+    <div style="position:absolute;bottom:2rem;right:2rem;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.3em;color:rgba(255,255,255,0.5);">EN VIVO</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="sobre-mi">
+  <div class="reveal">
+    <div class="about-label">// Quién soy</div>
+    <h2 class="about-title">Guitarra.<br>Voz.<br><em>Presencia.</em></h2>
+    <p class="about-text">
+      Guitarrista con más de 6 años de trayectoria profesional y 15 años de experiencia en el instrumento. Ha colaborado con artistas nacionales e internacionales, consolidando una presencia sólida en escenarios, giras y proyectos musicales a lo largo de Venezuela.
+    </p>
+    <p class="about-text">
+      Actualmente desarrolla su carrera como cantautora y solista, con canciones propias que llevan su sello personal: fuerza, emoción y la guitarra eléctrica al centro del escenario.
+    </p>
+    <div class="genre-tags">
+      <span class="tag">Soul</span>
+      <span class="tag">R&B</span>
+      <span class="tag">Blues</span>
+      <span class="tag">Pop Alternativo</span>
+      <span class="tag">Rock</span>
+    </div>
+  </div>
+  <div class="about-right reveal">
+    <div class="big-number">15</div>
+    <div style="border:1px solid rgba(139,0,0,0.2); padding:3rem; position:relative;">
+      <div style="font-family:'Playfair Display',serif; font-style:italic; font-size:1.4rem; line-height:1.7; color:#e8e0d8;">
+        "Mi propuesta está centrada en demostrar la fuerza y presencia femenina en la guitarra eléctrica — solos en vivo, performance vocal y una puesta en escena moderna."
+      </div>
+      <div style="margin-top:1.5rem; font-size:0.65rem; letter-spacing:0.3em; color:var(--red-bright);">— ANDREA MORALES</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- SOLO PHOTO BREAK -->
+<div style="position:relative; height:55vh; overflow:hidden;">
+  <img src="foto-solo.jpeg" alt="Andrea — solo en escenario" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%;filter:brightness(0.75);">
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(6,6,6,0.6) 0%, transparent 30%, transparent 60%, rgba(6,6,6,0.9) 100%);"></div>
+  <div style="position:absolute;top:50%;left:6rem;transform:translateY(-50%);">
+    <div style="font-size:0.65rem;letter-spacing:0.4em;text-transform:uppercase;color:#C0392B;margin-bottom:0.8rem;font-family:'Montserrat',sans-serif;">En escenario</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,5rem);color:white;line-height:0.95;">Cada nota.<br>Cada noche.</div>
+  </div>
+</div>
+
+<!-- EXPERIENCE TIMELINE -->
+<section class="experience" id="experiencia">
+  <div class="section-header reveal">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Giras &<br>Colaboraciones</h2>
+  </div>
+  <div class="timeline reveal">
+    <div class="timeline-item">
+      <div class="timeline-year">2022</div>
+      <div class="timeline-artist">Gustavo Elis</div>
+      <div class="timeline-desc">Gira nacional — Maracaibo, Punto Fijo, San Cristóbal, Valencia, Barquisimeto, Maracay y Caracas</div>
+    </div>
+    <div class="timeline-item"></div>
+    <div class="timeline-item"></div>
+    <div class="timeline-item">
+      <div class="timeline-year">2023</div>
+      <div class="timeline-artist">Lasso</div>
+      <div class="timeline-desc">Artista invitada abriendo conciertos en Valencia, Maracay y Caracas</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2023</div>
+      <div class="timeline-artist">Musas del Vallenato</div>
+      <div class="timeline-desc">Gira por Maracaibo y Caracas, incluyendo presentaciones en medios</div>
+    </div>
+    <div class="timeline-item"></div>
+    <div class="timeline-item"></div>
+    <div class="timeline-item">
+      <div class="timeline-year">2024</div>
+      <div class="timeline-artist">Gio Fernández</div>
+      <div class="timeline-desc">Gira — Mérida, Portuguesa y Guárico</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">2024</div>
+      <div class="timeline-artist">Jesse y Joy / Beéle & J Quiles</div>
+      <div class="timeline-desc">Opening como artista invitada — Meganova (nov–dic 2024)</div>
+    </div>
+    <div class="timeline-item"></div>
+    <div class="timeline-item"></div>
+    <div class="timeline-item">
+      <div class="timeline-year">2025</div>
+      <div class="timeline-artist">Bonny Cepeda · Liz</div>
+      <div class="timeline-desc">Carnavales 2025 · Guitarrista principal (feb 2025 – actualidad)</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="projects" id="proyectos">
+  <div class="reveal">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Proyectos<br>Propios</h2>
+    </div>
+  </div>
+  <div style="display:flex; flex-direction:column; gap:1.5rem;">
+    <div class="project-card reveal">
+      <div class="project-card-tag">2023 – Actualidad</div>
+      <div class="project-card-title">MEGANOVA</div>
+      <div class="project-card-text">Proyecto musical femenino que combina corrientes del rock con música original y shows temáticos. Ha participado en la apertura de Jesse y Joy, Gatorade Caracas Rock, Oktoberfest 2024 y el Teatro Teresa Carreño.</div>
+      <div class="project-card-year">23</div>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-card-tag">Actualidad — Proyecto Solista</div>
+      <div class="project-card-title">ANDREA MORALES</div>
+      <div class="project-card-text">Cantautora con canciones propias. Soul, R&B, blues y pop alternativo. Guitarra eléctrica al protagonismo, solos en vivo y un performance vocal que resalta la fuerza femenina en la música.</div>
+      <div class="project-card-year">AM</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- VOCAL PHOTO ACCENT -->
+<div style="display:grid;grid-template-columns:1fr 1.4fr;min-height:50vh;overflow:hidden;">
+  <div style="position:relative;overflow:hidden;">
+    <img src="foto-vocal.jpeg" alt="Andrea — voz y guitarra" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%;filter:brightness(0.72) grayscale(20%);">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,transparent 60%,rgba(6,6,6,1));"></div>
+  </div>
+  <div style="background:var(--dark);display:flex;flex-direction:column;justify-content:center;padding:4rem 5rem;">
+    <div style="font-size:0.6rem;letter-spacing:0.4em;text-transform:uppercase;color:#C0392B;margin-bottom:1rem;font-family:'Montserrat',sans-serif;">Propuesta vocal</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,4vw,4rem);color:white;line-height:0.95;margin-bottom:1.5rem;">Guitarra<br>y Voz.<br><span style="color:#C0392B;">En vivo.</span></div>
+    <p style="font-family:'Montserrat',sans-serif;font-size:0.8rem;line-height:1.8;color:#d0c8c0;">Un show en formato solista donde la guitarra eléctrica y la voz se complementan en una sola artista. Sin banda. Sin playback. Solo presencia, técnica y emoción.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- WHAT I OFFER -->
+<section class="offer" id="oferta">
+  <div class="section-header reveal">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Propuesta<br>Escénica</h2>
+  </div>
+  <div class="offer-grid">
+    <div class="offer-item reveal">
+      <div class="offer-icon">🎸</div>
+      <div class="offer-title">Show Solista</div>
+      <div class="offer-text">Guitarra, voz y soporte instrumental. Un formato completo que no necesita banda — presencia total en escena.</div>
+    </div>
+    <div class="offer-item reveal">
+      <div class="offer-icon">⚡</div>
+      <div class="offer-title">Solos en Vivo</div>
+      <div class="offer-text">Solos de guitarra ejecutados en vivo, acompañados de una puesta en escena moderna. Virtuosismo sin concesiones.</div>
+    </div>
+    <div class="offer-item reveal">
+      <div class="offer-icon">🎤</div>
+      <div class="offer-title">Performance Vocal</div>
+      <div class="offer-text">Una voz que complementa y eleva. Nostalgia, frescura y conexión real con el público desde el primer acorde.</div>
+    </div>
+    <div class="offer-item reveal">
+      <div class="offer-icon">👥</div>
+      <div class="offer-title">Mayor Afluencia</div>
+      <div class="offer-text">Un show que atrae público y lo mantiene más tiempo en el local. Música en vivo que eleva la experiencia del cliente.</div>
+    </div>
+    <div class="offer-item reveal">
+      <div class="offer-icon">📱</div>
+      <div class="offer-title">Visibilidad Digital</div>
+      <div class="offer-text">Contenido promocional que impulsa el alcance en redes del local. Una comunidad activa que suma clientes nuevos.</div>
+    </div>
+    <div class="offer-item reveal">
+      <div class="offer-icon">♀</div>
+      <div class="offer-title">Propuesta Única</div>
+      <div class="offer-text">Un concepto femenino, fresco y diferenciado. La fuerza de la mujer en la guitarra eléctrica como protagonista.</div>
+    </div>
+  </div>
+</section>
+
+<!-- REPERTOIRE -->
+<section class="repertoire" id="repertorio">
+  <div class="section-header reveal">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Repertorio</h2>
+  </div>
+  <div class="reveal" style="font-size:0.78rem; color:var(--muted); margin-top:-2rem; margin-bottom:1rem; max-width:500px;">
+    Clásicos icónicos y éxitos actuales que conectan con públicos de todas las edades — de los 80s a hoy.
+  </div>
+  <div class="artist-list">
+    <div class="artist-name">Michael Jackson</div>
+    <div class="artist-name">Bruno Mars</div>
+    <div class="artist-name">Elena Rose</div>
+    <div class="artist-name">Billie Eilish</div>
+    <div class="artist-name">John Mayer</div>
+    <div class="artist-name">Olivia Dean</div>
+    <div class="artist-name">& más</div>
+  </div>
+</section>
+
+<!-- PRICE -->
+<div class="price-section reveal">
+  <div class="price-left">
+    <h2>Show en vivo.<br>Una noche que se recuerda.</h2>
+    <p>Disponible para locales, eventos privados y festivales en toda Venezuela.</p>
+    <a href="#contacto" class="btn-outline" style="display:inline-block; margin-top:2rem; border-color:rgba(255,255,255,0.4); color:white;">Consultar disponibilidad</a>
+  </div>
+  <div class="price-badge">
+    <span class="currency">DESDE</span>
+    <span class="amount">120<span style="font-size:1.5rem">$</span></span>
+    <span class="duration">50–60 minutos</span>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact" id="contacto">
+  <div class="reveal">
+    <h2 class="contact-title">
+      <span>Hagamos algo</span>
+      Increíble<br>Juntos.
+    </h2>
+    <p class="contact-text">
+      ¿Quieres llevar música en vivo de alto nivel a tu espacio? Escríbeme y hablamos de la propuesta ideal para tu evento o local.
+    </p>
+    <div class="social-row">
+      <a href="#" class="social-pill">Instagram</a>
+      <a href="#" class="social-pill">TikTok</a>
+      <a href="#" class="social-pill">Facebook</a>
+      <a href="#" class="social-pill">YouTube</a>
+      <a href="#" class="social-pill">X / Twitter</a>
+    </div>
+    <div style="font-size:0.65rem; color:var(--muted); margin-top:1rem; letter-spacing:0.15em;">@andreamoralesguitar en todas las redes</div>
+  </div>
+  <div class="contact-info reveal">
+    <div class="contact-item">
+      <span class="contact-item-label">WhatsApp</span>
+      <span class="contact-item-value">+58 412 929 4907</span>
+    </div>
+    <div class="contact-item">
+      <span class="contact-item-label">WhatsApp</span>
+      <span class="contact-item-value">+58 424 185 3313</span>
+    </div>
+    <div class="contact-item">
+      <span class="contact-item-label">Redes Sociales</span>
+      <span class="contact-item-value">@andreamoralesguitar</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- FINAL IMAGE -->
+<div style="position:relative; height:70vh; overflow:hidden;">
+  <img src="foto-final.jpeg" alt="Andrea Morales ante el público" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 65%;">
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(6,6,6,0.7) 0%, transparent 35%, transparent 65%, rgba(6,6,6,1) 100%);"></div>
+  <div style="position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);text-align:center;">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,4rem);color:white;letter-spacing:0.15em;line-height:1;">Donde hay una guitarra,<br><span style="color:#C0392B;">hay una historia.</span></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo-text">ANDREA MORALES</div>
+  <div class="copy">Guitarrista / Cantautora · Venezuela · 2025</div>
+</footer>
+
+<script>
+  // Custom cursor
+  const dot = document.getElementById('cursorDot');
+  document.addEventListener('mousemove', e => {
+    dot.style.left = e.clientX + 'px';
+    dot.style.top = e.clientY + 'px';
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Hero animations run on load
+  document.querySelectorAll('.hero-name, .hero-subtitle, .hero-cta').forEach(el => {
+    el.style.animationPlayState = 'running';
+  });
+</script>
+
+</body>
+</html>
